@@ -22,5 +22,7 @@ module CodehallChallenge
     config.generators do |g|
       g.test_framework :test_unit, fixture: false
     end
+
+    config.action_controller.action_on_unpermitted_parameters = :raise
   end
 end
