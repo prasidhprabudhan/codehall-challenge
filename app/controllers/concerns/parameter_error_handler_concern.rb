@@ -9,7 +9,7 @@ module ParameterErrorHandlerConcern
     private
   
     def handle_unpermitted_parameters(exception)
-      render json: { error: "Bad Request - Unpermitted parameters: #{exception.params}" }, status: :bad_request
+      render json: { error: "Bad Request - Unpermitted parameters: #{exception.params.to_sentence}" }, status: :bad_request
     end
 end
   
