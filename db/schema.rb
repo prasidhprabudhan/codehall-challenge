@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_14_074906) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_15_194439) do
   create_table "colleges", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_14_074906) do
     t.integer "exam_id", null: false
     t.string "first_name", null: false
     t.string "last_name"
-    t.string "phone_number"
+    t.string "phone_number", null: false
     t.datetime "start_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

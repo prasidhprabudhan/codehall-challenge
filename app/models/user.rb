@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   has_one :exam_window, through: :exam
 
+  validates :first_name, presence: true
+  validates :phone_number, presence: true
   validate :check_if_start_time_falls_in_exam_window, if: :exam_window
 
   private
