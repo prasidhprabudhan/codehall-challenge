@@ -17,6 +17,6 @@ class ExamTest < ActiveSupport::TestCase
     exam = Exam.create(subject: Faker::Educator.subject)
 
     assert_not exam.valid?
-    assert_includes exam.errors.full_messages, "College must exist"
+    assert_includes exam.errors.full_messages,  t('errors.exist', column: "College")
   end
 end

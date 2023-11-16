@@ -28,12 +28,12 @@ class ExamWindowTest < ActiveSupport::TestCase
     )
 
     assert_not exam_window.valid?
-    assert_includes exam_window.errors.full_messages, "Exam must exist"
+    assert_includes exam_window.errors.full_messages, t('errors.exist', column: "Exam")
   end
 
   def test_exam_window_is_invalid_when_start_date_is_after_end_date
     exam_window = build :exam_window, start_date: Date.today + 1.day, end_date: Date.today
     assert_not exam_window.valid?
-    assert_includes exam_window.errors.full_messages, 'Start date must be before the end date'
+    assert_includes exam_window.errors.messages[:start_date], t('errors.exam_window')
   end
 end

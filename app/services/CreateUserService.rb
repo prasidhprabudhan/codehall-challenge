@@ -26,17 +26,17 @@ class CreateUserService
           end
           
           def load_college
-            @college = load_record(College, options[:college_id], "College not found")
+            @college = load_record(College, options[:college_id], I18n.t('errors.not_found', entity: "College"))
           end
           
           def load_exam
-            @exam = load_record(Exam, options[:exam_id], "Exam not found")
+            @exam = load_record(Exam, options[:exam_id], I18n.t('errors.not_found', entity: "Exam"))
           end
           
 
         def check_if_exam_belong_to_college
             if exam.college.id != college.id
-                errors << "Exam do not belong to the college"
+                errors << I18n.t('errors.not_belong', entity1: "Exam", entity2: "college")
             end
         end
 

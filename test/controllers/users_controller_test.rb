@@ -35,7 +35,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         end
 
         assert_response :bad_request
-        assert_includes json_body["errors"], "First name can't be blank"
+        assert_includes json_body["errors"], t('errors.presence', column: "First name")
     end
 
     def test_create_should_return_error_if_phone_number_is_blank
@@ -45,7 +45,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         end
 
         assert_response :bad_request
-        assert_includes json_body["errors"], "Phone number can't be blank"
+        assert_includes json_body["errors"], t('errors.presence', column: "Phone number")
     end
 
     def test_user_cannot_be_created_with_invalid_parameters
@@ -54,7 +54,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         end
 
         assert_response :bad_request
-        assert_includes json_body["error"], "Bad Request - Unpermitted parameters: name"
+        assert_includes json_body["error"], t('errors.bad_request', params: "name")
     end
 
     def test_user_cannot_be_created_with_invalid_college_id
@@ -63,7 +63,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         end
 
         assert_response :bad_request
-        assert_includes json_body["errors"], "College not found"
+        assert_includes json_body["errors"], t('errors.not_found', entity: "College")
     end
 
     def test_user_cannot_be_created_with_invalid_exam_id
@@ -72,7 +72,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         end
 
         assert_response :bad_request
-        assert_includes json_body["errors"], "Exam not found"
+        assert_includes json_body["errors"], t('errors.not_found', entity: "Exam")
     end
 
     def test_user_cannot_be_created_when_given_exam_do_not_belong_to_the_given_college
@@ -83,7 +83,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         end
 
         assert_response :bad_request
-        assert_includes json_body["errors"], "Exam do not belong to the college"
+        assert_includes json_body["errors"], t('errors.not_belong', entity1: "Exam", entity2: "college")
     end
 
     def test_user_cannot_be_created_when_start_time_do_not_fall_in_the_exam_window
@@ -118,7 +118,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
             post users_path, params: { user: { exam_id: "Invalid id", college_id: @college.id }}
         end
 
-        assert_includes ApiRequest.first.error_message, "Exam not found"
+        assert_includes ApiRequest.first.error_message, t('errors.not_found', entity: "Exam")
     end
     
     private
