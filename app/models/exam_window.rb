@@ -10,7 +10,7 @@ class ExamWindow < ApplicationRecord
 
     def start_date_before_end_date
       if start_date.present? && end_date.present? && start_date > end_date
-        errors.add(:start_date, "must be before the end date")
+        errors.add(:start_date, t('errors.exam_window'))
       end
     end
 end

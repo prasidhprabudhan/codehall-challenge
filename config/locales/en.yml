@@ -31,3 +31,13 @@
 
 en:
   hello: "Hello world"
+  errors:
+    exam_window: "must be before the end date"
+    exist: "%{column} must exist"
+    presence: "%{column} can't be blank"
+    bad_request: "Bad Request - Unpermitted parameters: %{params}"
+    not_found: "%{entity} not found"
+    not_belong: "%{entity1} do not belong to the %{entity2}"
+  models:
+    user:
+      start_time: "must fall within the date range of %{start_date} to %{end_date}"

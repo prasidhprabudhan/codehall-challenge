@@ -26,14 +26,14 @@ class UserTest < ActiveSupport::TestCase
     user = User.create(user_params)
 
     assert_not user.valid?
-    assert_includes user.errors.full_messages, "Exam must exist"
+    assert_includes user.errors.full_messages, t('errors.exist', column: "Exam")
   end
 
   def test_user_belongs_to_a_college
     user = User.create(user_params)
 
     assert_not user.valid?
-    assert_includes user.errors.full_messages, "College must exist"
+    assert_includes user.errors.full_messages, t('errors.exist', column: "College")
   end
 
   def test_start_time_falls_in_exam_window
@@ -41,8 +41,8 @@ class UserTest < ActiveSupport::TestCase
 
     assert_not user.valid?
 
-    assert_includes user.errors.full_messages, 
-      "Start time must fall within the date range of #{@exam_window.start_date} to #{@exam_window.end_date}"
+    assert_includes user.errors.messages[:start_time], 
+      t('models.user.start_time', start_date: @exam_window.start_date, end_date: @exam_window.end_date)
   end
 
   private

@@ -16,7 +16,7 @@ class User < ApplicationRecord
       range = start_date..end_date
 
       unless range.cover?(start_time)
-        errors.add(:start_time, "must fall within the date range of #{start_date} to #{end_date}")
+        errors.add(:start_time, t('models.user.start_time', start_date:, end_date:))
       end
     end
 end
