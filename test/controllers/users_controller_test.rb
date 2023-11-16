@@ -106,6 +106,20 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         assert_includes json_body["errors"], 
             "Start time must fall within the date range of #{@exam_window.start_date} to #{@exam_window.end_date}"
     end
+
+    def test_request_is_logged_when_user_is_created
+        assert_difference -> { ApiRequest.count } do
+            post users_path, params: user_params
+        end
+    end
+
+    def test_request_is_logged_with_error_message_on_failure_of_create_user_action
+        assert_difference -> { ApiRequest.count } do
+            post users_path, params: { user: { exam_id: "Invalid id", college_id: @college.id }}
+        end
+
+        assert_includes ApiRequest.first.error_message, "Exam not found"
+    end
     
     private
 

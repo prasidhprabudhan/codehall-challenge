@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_15_194439) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_16_121355) do
+  create_table "api_requests", force: :cascade do |t|
+    t.string "request_method"
+    t.string "endpoint"
+    t.json "parameters"
+    t.string "error_message"
+    t.datetime "created_at", null: false
+  end
+
   create_table "colleges", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false

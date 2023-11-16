@@ -5,8 +5,10 @@ class UsersController < ApplicationController
         service = CreateUserService.new(user_params)
         user = service.process
         if service.errors.present?
+            log_api_request(service.errors.join(", "))
             render status: :bad_request, json: { errors: service.errors }
         else
+            log_api_request
             render status: :ok, json: { user: user }
         end
     end
