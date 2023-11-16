@@ -1,24 +1,56 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Install the gems by executing following command.
 
-Things you may want to cover:
+```bash
+bundle install
+```
 
-* Ruby version
+Create config/database.yml file if not present. Example template is given below
 
-* System dependencies
+```bash
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem "sqlite3"
+#
+default: &default
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
-* Configuration
+development:
+  <<: *default
+  database: db/development.sqlite3
 
-* Database creation
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: db/test.sqlite3
 
-* Database initialization
+production:
+  <<: *default
+  database: db/production.sqlite3
+```
 
-* How to run the test suite
+Run migrations by executing the following command
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+rails db:migrate
+```
 
-* Deployment instructions
+Create database by executing the following command
 
-* ...
+```bash
+rails db:create
+```
+
+Run tests by executing following command.
+
+```bash
+rails test -v
+```
+
